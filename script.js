@@ -225,7 +225,7 @@ const calculateTotal = () => {
     const categoryTask = tasks.filter((task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
     );
     totalCategoryTask.innerHTML = `${categoryTask.length} Task`;
-    totalTask.innerHTML = categoryTask.length;
+    totalTask.innerHTML = tasks.length; // Total dari semua kategori
 
 };
 
@@ -302,6 +302,7 @@ const renderTasks = () => {
 
                 tasks[index].completed = !tasks[index].completed;
                 saveLocal();
+                calculateTotal(); // Perbarui total setelah toggle
             });
 
 
@@ -348,6 +349,7 @@ const renderTasks = () => {
                 tasks.splice(index, 1);
                 saveLocal();
                 renderTasks();
+                calculateTotal(); // Perbarui total setelah delete
             });
         });
 
@@ -387,6 +389,7 @@ addBtn.addEventListener("click", () => {
         saveLocal();
         toggleAddTaskForm();
         renderTasks();
+        calculateTotal(); // Perbarui total setelah add
     }
 });
 categories.forEach(category => {
