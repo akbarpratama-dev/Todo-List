@@ -1,52 +1,84 @@
+<!-- Deklarasi tipe dokumen HTML5 -->
 <!DOCTYPE html>
+<!-- Elemen root HTML dengan bahasa Indonesia -->
 <html lang="en">
 <head>
+    <!-- Set karakter encoding untuk mendukung karakter khusus -->
     <meta charset="UTF-8">
+    <!-- Viewport untuk responsif mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link ke file CSS eksternal -->
     <link rel="stylesheet" href="style.css">
+    <!-- Judul halaman yang muncul di tab browser -->
     <title>Todo list</title>
 </head>
+<!-- Body utama halaman -->
 <body>
+    <!-- Container utama untuk seluruh aplikasi -->
     <div class="wrapper">
+        <!-- Backdrop untuk efek transisi layar -->
         <div class="screen-backdrop"></div>
+        <!-- Layar utama/beranda -->
         <div class="screen home-screen">
+            <!-- Header wrapper untuk bagian atas -->
             <div class="head-wrapper">
+            <!-- Tombol menu hamburger -->
             <div class="menu-btn">
+                <!-- Icon menu hamburger menggunakan SVG -->
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                     class="w-6 h-6"
                 >
+                    <!-- Path untuk membuat garis horizontal menu -->
                     <path 
                     stroke-linecap="round" stroke-linejoin="round"
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
                     />
                 </svg>
             </div>
+            <!-- Section selamat datang -->
             <div class="welcome">
+                <!-- Konten teks sambutan -->
                 <div class="content">
+                   <!-- Pesan sambutan dengan nama pengguna -->
                    <h1>Halo Akbar</h1> 
+                   <!-- Informasi jumlah tugas hari ini -->
                    <p>hari ini kamu punya <span class="totalTask">5</span> tugas</p>
                 </div>
+                <!-- Container untuk gambar profil -->
                 <div class="img">
+                    <!-- Backdrop untuk efek pada gambar -->
                     <div class="backdrop"></div>
+                    <!-- Gambar avatar pengguna -->
                     <img src="images/boy.png" alt="">
                 </div>
                 </div>
             </div>
+            <!-- Wrapper untuk daftar kategori tugas -->
             <div class="categories-wrapper">
+                <!-- Container kategori -->
                 <div class="categories">
+                    <!-- Item kategori individual -->
                     <div class="category">
+                        <!-- Bagian kiri kategori (gambar + konten) -->
                         <div class="left">
+                            <!-- Icon kategori -->
                             <img src="images/boy.png" alt="">
+                            <!-- Detail kategori -->
                             <div class="content">
+                                <!-- Nama kategori -->
                                 <h1>Personal</h1>
+                                <!-- Jumlah tugas dalam kategori -->
                                 <p>5 Tugas</p>
                             </div>
                         </div>
+                        <!-- Menu opsi kategori -->
                         <div class="options">
+                            <!-- Tombol toggle untuk opsi -->
                             <div class="toggle-btn">
+                                <!-- Icon titik tiga untuk menu -->
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -55,6 +87,7 @@
                                     stroke="currentColor"
                                     class="w-6 h-6"
                                 >
+                                    <!-- Path untuk tiga titik vertikal -->
                                     <path
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
@@ -67,9 +100,13 @@
                 </div>
             </div>
         </div>
+        <!-- Layar kategori (detail kategori dan daftar tugas) -->
         <div class="screen category-screen">
+            <!-- Header untuk layar kategori -->
             <div class="head-wrapper">
+                <!-- Tombol kembali ke layar utama -->
                 <div class="back-btn">
+                    <!-- Icon panah kiri untuk kembali -->
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -77,6 +114,7 @@
                     stroke-width="1.5" stroke="currentColor"
                     class="w-6 h-6"
                     >
+                    <!-- Path untuk panah kembali -->
                     <path 
                         stroke-linecap="round" 
                         stroke-linejoin="round"
@@ -84,7 +122,9 @@
                     />
                     </svg>
                 </div>
+                 <!-- Menu opsi di layar kategori -->
                  <div class="options">
+                    <!-- Icon titik tiga untuk menu opsi -->
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -93,6 +133,7 @@
                     stroke="currentColor"
                     class="w-6 h-6"
                     >
+                    <!-- Path untuk tiga titik vertikal -->
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -101,19 +142,31 @@
                     </svg>
                 </div>
             </div>
+            <!-- Detail informasi kategori -->
             <div class="category-details">
+                <!-- Gambar kategori -->
                 <img src="images/boy.png" alt="" id="category-img">
+                <!-- Informasi detail kategori -->
                 <div class="details">
+                    <!-- Jumlah tugas dalam kategori -->
                     <p class="category-task">8 Task</p>
+                    <!-- Nama kategori -->
                     <h1 class="category-title">Personal</h1>
                 </div>
             </div>
+            <!-- Wrapper untuk daftar tugas -->
             <div class="tasks-wrapper">
+                <!-- Container daftar tugas -->
                 <div class="tasks">
+                    <!-- Wrapper untuk satu item tugas -->
                     <div class="task-wrapper">
+                        <!-- Label yang berisi checkbox dan teks tugas -->
                         <label for="task" class="task">
+                            <!-- Checkbox untuk menandai tugas selesai -->
                             <input type="checkbox" name="" id="task">
+                            <!-- Custom checkmark dengan icon SVG -->
                             <span class="checkmark">
+                              <!-- Icon centang untuk tugas selesai -->
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -122,6 +175,7 @@
                                 stroke="currentColor"
                                 class="w-6 h-6"
                             >
+                                <!-- Path untuk tanda centang -->
                                 <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -129,9 +183,12 @@
                                 />
                             </svg>
                             </span>
+                            <!-- Teks deskripsi tugas -->
                             <p>Buy a new car</p>
                         </label>
+                        <!-- Tombol hapus tugas -->
                         <div class="delete">
+                            <!-- Icon tempat sampah untuk hapus -->
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -140,6 +197,7 @@
                             stroke="currentColor"
                             class="w-6 h-6"
                             >
+                            <!-- Path untuk icon tempat sampah -->
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -152,7 +210,9 @@
             </div>
         </div>
 
+        <!-- Tombol floating untuk menambah tugas baru -->
         <div class="add-task-btn">
+             <!-- Icon plus untuk tambah tugas -->
              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -161,6 +221,7 @@
                 stroke="currentColor"
                 class="w-6 h-6"
             >
+                <!-- Path untuk tanda plus -->
                 <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -168,31 +229,50 @@
                 />
             </svg>
         </div>
+        <!-- Backdrop gelap saat modal form terbuka -->
         <div class="black-backdrop"></div>
+        <!-- Modal form untuk menambah tugas -->
         <div class="add-task">
+            <!-- Backdrop untuk modal -->
             <div class="add-task-backdrop"></div>
+            <!-- Judul modal -->
             <h1 class="heading">Add Task</h1>
+            <!-- Grup input untuk nama tugas -->
             <div class="input-group">
+                <!-- Label untuk input tugas -->
                 <label for="task-input">Task</label>
+                <!-- Input field untuk nama tugas -->
                 <input type="text" id="task-input" required>
             </div>
+            <!-- Grup input untuk memilih kategori -->
             <div class="input-group">
+                <!-- Label untuk select kategori -->
                 <label for="category-select">Category</label>
+                <!-- Dropdown untuk memilih kategori -->
                 <select name="" id="category-select">
+                    <!-- Opsi kategori Personal -->
                     <option value="personal">Personal</option>
+                    <!-- Opsi kategori Work -->
                     <option value="work">Work</option>
+                    <!-- Opsi kategori Shopping -->
                     <option value="shopping">Shopping</option>
                 </select>
             </div>
+            <!-- Container tombol aksi modal -->
             <div class="btns">
+                <!-- Tombol batal -->
                 <button class="cancel-btn">Cancel</button>
+                <!-- Tombol tambah tugas -->
                 <button class="add-btn">Add</button>
             </div>
         </div>
     </div>
 
+    <!-- Link ke file JavaScript eksternal -->
     <script src="script.js"></script>
+<!-- Penutup tag body -->
 </body>
+<!-- Penutup tag html -->
 </html>
 
                        
