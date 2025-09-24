@@ -1,33 +1,50 @@
+// Ambil elemen wrapper utama aplikasi
 const wrapper = document.querySelector(".wrapper");
+// Ambil tombol menu hamburger
 const menuBtn = document.querySelector(".menu-btn");
+// Ambil tombol kembali di layar kategori
 const backBtn = document.querySelector(".back-btn");
 
+// Fungsi untuk toggle antara layar utama dan layar kategori
 const toggleScreen = () => {
+    // Toggle class "show-category" untuk mengatur transisi layar
     wrapper.classList.toggle("show-category");
 
 };
 
+// Event listener untuk tombol kembali
 backBtn.addEventListener("click", toggleScreen);
 
+// Event listener untuk tombol menu
 menuBtn.addEventListener("click", toggleScreen);
 
+// Ambil tombol floating untuk menambah tugas
 const addTaskBtn = document.querySelector(".add-task-btn");
+// Ambil form modal untuk menambah tugas
 const addTaskForm = document.querySelector(".add-task");
+// Ambil backdrop gelap untuk modal
 const blackBackDrop = document.querySelector(".black-backdrop");
 
+// Fungsi untuk toggle modal tambah tugas
 const toggleAddTaskForm = () => {
+    // Toggle class "active" pada form modal
     addTaskForm.classList.toggle("active");
+    // Toggle class "active" pada backdrop gelap
     blackBackDrop.classList.toggle("active");
+    // Toggle class "active" pada tombol tambah (untuk rotasi animasi)
     addTaskBtn.classList.toggle("active");
 };
 
+// Event listener untuk tombol tambah tugas
 addTaskBtn.addEventListener("click", toggleAddTaskForm);
+// Event listener untuk backdrop (tutup modal saat diklik backdrop)
 blackBackDrop.addEventListener("click", toggleAddTaskForm);
 
+// Array berisi data kategori tugas yang tersedia
 let categories = [
   {
-    title: "Personal",
-    img: "boy.png",
+    title: "Personal", // Nama kategori
+    img: "boy.png", // Icon/gambar kategori
   },
   {
     title: "Work",
@@ -59,12 +76,13 @@ let categories = [
   },
 ];
 
+// Array berisi semua data tugas
 let tasks = [
   {
-    id: 1,
-    task: "Go to market",
-    category: "Shopping",
-    completed: false,
+    id: 1, // ID unik untuk setiap tugas
+    task: "Go to market", // Deskripsi tugas
+    category: "Shopping", // Kategori tugas
+    completed: false, // Status penyelesaian tugas
   },
   {
     id: 2,
@@ -213,39 +231,60 @@ let tasks = [
   },
   // Add more tasks for each category as desired
 ];
+// Variable untuk menyimpan kategori yang sedang dipilih/aktif
 let selectedCategory = categories[0];
 
-const categoriesContainer = document.querySelector(".categories");
-const categoryTitle = document.querySelector(".category-title");
-const totalCategoryTask = document.querySelector(".category-task");
-const categoryImg = document.querySelector("#category-img");
-const totalTask = document.querySelector(".totalTask");
+// Ambil elemen-elemen DOM yang diperlukan
+const categoriesContainer = document.querySelector(".categories"); // Container untuk daftar kategori
+const categoryTitle = document.querySelector(".category-title"); // Judul kategori di layar detail
+const totalCategoryTask = document.querySelector(".category-task"); // Jumlah tugas dalam kategori
+const categoryImg = document.querySelector("#category-img"); // Gambar kategori di layar detail
+const totalTask = document.querySelector(".totalTask"); // Total semua tugas di halaman utama
 
+// Fungsi untuk menghitung dan memperbarui total tugas
 const calculateTotal = () => {
+    // Filter tugas berdasarkan kategori yang sedang dipilih
     const categoryTask = tasks.filter((task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
     );
+    // Update tampilan jumlah tugas dalam kategori
     totalCategoryTask.innerHTML = `${categoryTask.length} Task`;
+    // Update tampilan total semua tugas
     totalTask.innerHTML = tasks.length; // Total dari semua kategori
 
 };
 
 
+
+
+// Fungsi untuk merender/menampilkan daftar kategori di layar utama
 const renderCategories = () => {
+    // Kosongkan container kategori terlebih dahulu
     categoriesContainer.innerHTML = "";
+    // Loop melalui setiap kategori
     categories.forEach(category => {
+        // Filter tugas berdasarkan kategori untuk menghitung jumlah
         const categoryTask = tasks.filter((task) => task.category.toLowerCase() === category.title.toLowerCase());
 
+        // Buat elemen div untuk kategori
         const div = document.createElement("div");
         div.classList.add("category");
+        // Tambah event listener untuk klik kategori
         div.addEventListener("click", () => {
+            // Tampilkan layar kategori
             wrapper.classList.add("show-category");
+            // Set kategori yang dipilih
             selectedCategory = category;
+            // Update judul kategori
             categoryTitle.innerText = category.title;
+            // Update gambar kategori
             categoryImg.src = `images/${category.img}`; 
+            // Hitung ulang total tugas
             calculateTotal();
+            // Render ulang daftar tugas
             renderTasks();
         });
 
+        // Set HTML untuk kategori
         div.innerHTML = `
             <div class="left">
                             <img src="images/${category.img}" alt="${category.title}" >
@@ -274,38 +313,54 @@ const renderCategories = () => {
                         </div>
                     </div>
         `;
+        // Tambahkan kategori ke container
         categoriesContainer.appendChild(div);
     });
 };
+// Ambil container untuk daftar tugas
 const tasksContainer = document.querySelector(".tasks");
+// Fungsi untuk merender/menampilkan daftar tugas dalam kategori yang dipilih
 const renderTasks = () => {
+    // Kosongkan container tugas terlebih dahulu
     tasksContainer.innerHTML = "";
+    // Filter tugas berdasarkan kategori yang sedang dipilih
     const categoryTask = tasks.filter((task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
     );
+    // Jika tidak ada tugas dalam kategori
     if (categoryTask.length === 0) {
+        // Tampilkan pesan "tidak ada tugas"
         tasksContainer.innerHTML = `<p class="no-task">Tidak ada tugas</p>`;
         return;
     } else {
+        // Loop melalui setiap tugas dalam kategori
         categoryTask.forEach((task) => {
+            // Buat wrapper untuk tugas
             const div = document.createElement("div");
             div.classList.add("task-wrapper");
+            // Buat label untuk checkbox dan teks tugas
             const label = document.createElement("label");
             label.classList.add("task");
             label.setAttribute("for", task.id);
+            // Buat checkbox
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.id = task.id;
             checkbox.checked = task.completed;
 
+            // Event listener untuk perubahan status checkbox
             checkbox.addEventListener("change", () => {
+                // Cari index tugas dalam array
                 const index = tasks.findIndex((t) => t.id === task.id);
 
+                // Toggle status completed
                 tasks[index].completed = !tasks[index].completed;
+                // Simpan ke localStorage
                 saveLocal();
-                calculateTotal(); // Perbarui total setelah toggle
+                // Perbarui total setelah toggle
+                calculateTotal();
             });
 
-
+            // Set HTML untuk tombol delete
             div.innerHTML = `<div class="delete">
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -322,6 +377,7 @@ const renderTasks = () => {
                             />
                             </svg>
                         </div>`;
+                        // Set HTML untuk label dan checkbox
                         label.innerHTML = `<span class="checkmark">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -339,65 +395,96 @@ const renderTasks = () => {
                             </svg>
                             </span>
                             <p>${task.task}</p>`;
+            // Sisipkan checkbox ke awal label
             label.prepend(checkbox);
+            // Sisipkan label ke awal div
             div.prepend(label);
+            // Tambahkan tugas ke container
             tasksContainer.appendChild(div);
 
+            // Ambil tombol delete dan tambah event listener
             const deleteBtn = div.querySelector(".delete");
             deleteBtn.addEventListener("click", () => {
+                // Cari index tugas dalam array
                 const index = tasks.findIndex((t) => t.id === task.id);
+                // Hapus tugas dari array
                 tasks.splice(index, 1);
+                // Simpan ke localStorage
                 saveLocal();
+                // Render ulang daftar tugas
                 renderTasks();
-                calculateTotal(); // Perbarui total setelah delete
+                // Perbarui total setelah delete
+                calculateTotal();
             });
         });
 
+        // Render ulang kategori dan hitung total
         renderCategories();
         calculateTotal();
     }
 };
+// Fungsi untuk menyimpan data tugas ke localStorage
 const saveLocal = () => {
+    // Simpan array tasks dalam format JSON ke localStorage
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
+// Fungsi untuk mengambil data tugas dari localStorage
 const getLocal = () => {
+    // Ambil data dari localStorage dan parse dari JSON
     const localTasks = JSON.parse(localStorage.getItem("tasks"));
+    // Jika ada data, update array tasks
     if (localTasks) {
         tasks = localTasks;
     }
 };
-const categorySelect = document.querySelector("#category-select");
-const cancelBtn = document.querySelector(".cancel-btn");
-const addBtn = document.querySelector(".add-btn");
-const taskInput = document.querySelector("#task-input");
+// Ambil elemen-elemen form untuk menambah tugas
+const categorySelect = document.querySelector("#category-select"); // Dropdown pilihan kategori
+const cancelBtn = document.querySelector(".cancel-btn"); // Tombol batal
+const addBtn = document.querySelector(".add-btn"); // Tombol tambah
+const taskInput = document.querySelector("#task-input"); // Input field untuk nama tugas
 
+// Event listener untuk tombol batal
 cancelBtn.addEventListener("click", toggleAddTaskForm);
+// Event listener untuk tombol tambah tugas
 addBtn.addEventListener("click", () => {
+    // Ambil nilai dari input
     const task = taskInput.value;
     const category = categorySelect.value;
 
+    // Validasi input tidak boleh kosong
     if (task === "" || category === "") {
         alert("Please enter a task");
         return;
     }else {
+        // Buat object tugas baru
         const newTask = {
-            id: tasks.length + 1,
-            task,category, completed: false,
+            id: tasks.length + 1, // Generate ID sederhana
+            task,category, completed: false, // Set status awal belum selesai
         };
+        // Tambahkan tugas baru ke array
         tasks.push(newTask);
+        // Kosongkan input field
         taskInput.value = "";
+        // Simpan ke localStorage
         saveLocal();
+        // Tutup modal form
         toggleAddTaskForm();
+        // Render ulang daftar tugas
         renderTasks();
-        calculateTotal(); // Perbarui total setelah add
+        // Perbarui total setelah add
+        calculateTotal();
     }
 });
+// Populate dropdown kategori dengan semua kategori yang tersedia
 categories.forEach(category => {
+    // Buat elemen option
     const option = document.createElement("option");
-    option.value = category.title.toLowerCase();
-    option.textContent = category.title;
+    option.value = category.title.toLowerCase(); // Set value ke lowercase
+    option.textContent = category.title; // Set teks tampilan
+    // Tambahkan option ke select
     categorySelect.appendChild(option);
 });
-getLocal();
-calculateTotal();
-renderTasks();
+// Inisialisasi aplikasi
+getLocal(); // Ambil data dari localStorage
+calculateTotal(); // Hitung total tugas
+renderTasks(); // Render daftar tugas
