@@ -1,420 +1,492 @@
 
+/* Import font Inter dari Google Fonts dengan berbagai weight */
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+/* Reset CSS universal untuk menghilangkan margin dan padding default */
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Membuat width dan height termasuk padding dan border */
 }
+/* Sembunyikan scrollbar di webkit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
     width: 0;
 }
+/* Styling untuk body utama */
 body {
-    min-height: 100vh;
-    color: #2e2e2e;
-    background-color: #f5f5f5;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Inter", sans-serif;
+    min-height: 100vh; /* Minimal tinggi 100% viewport height */
+    color: #2e2e2e; /* Warna teks utama */
+    background-color: #f5f5f5; /* Warna background abu-abu terang */
+    background-size: cover; /* Background cover seluruh area */
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Posisikan konten di tengah horizontal */
+    align-items: center; /* Posisikan konten di tengah vertikal */
+    font-family: "Inter", sans-serif; /* Font utama aplikasi */
 }
+/* Container utama aplikasi */
 .wrapper{
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    padding: 30px 0;
-    display: flex;
+    position: relative; /* Posisi relatif untuk child elements yang absolute */
+    height: 100vh; /* Tinggi penuh viewport */
+    width: 100%; /* Lebar penuh */
+    overflow: hidden; /* Sembunyikan konten yang overflow */
+    padding: 30px 0; /* Padding atas bawah */
+    display: flex; /* Flexbox layout */
     
 }
+/* Animasi saat layar kategori ditampilkan - home screen bergeser ke kiri */
 .wrapper.show-category .home-screen{
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Geser 100% ke kiri */
 }
+/* Animasi saat layar kategori ditampilkan - category screen bergeser ke kiri */
 .wrapper.show-category .category-screen{
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Geser 100% ke kiri */
 }
 
+/* Animasi backdrop saat layar kategori ditampilkan */
 .wrapper.show-category .screen-backdrop{
-    transform: translate(-50%, -60%);
+    transform: translate(-50%, -60%); /* Geser backdrop saat transisi */
 }
 
+/* Media query untuk ukuran tablet ke atas (min-width 768px) */
 @media (min-width: 768px) {
+    /* Styling wrapper untuk desktop - membuat seperti mockup phone */
     .wrapper{
  
-        height: 50rem;
-        width: 25rem;
-        border-radius: 40px;
-        border: 10px solid #2e2e2e;
+        height: 50rem; /* Tinggi tetap untuk desktop */
+        width: 25rem; /* Lebar tetap untuk desktop */
+        border-radius: 40px; /* Border radius besar untuk efek phone */
+        border: 10px solid #2e2e2e; /* Border tebal simulasi frame phone */
         
     }
 }
+/* Styling untuk setiap layar dalam wrapper */
 .wrapper .screen{
-    flex: 1;
-    min-width: 100%;
-    transition: all 0.3s;
+    flex: 1; /* Ambil ruang penuh dalam flexbox */
+    min-width: 100%; /* Lebar minimal 100% */
+    transition: all 0.3s; /* Animasi smooth untuk semua properti */
 }
+/* Background backdrop berwarna biru di bagian atas */
 .screen-backdrop{
-   width: 135%;
-   height: 25rem;
-   position: absolute;
-   top: 0;
-   left: 50%;
-   z-index: -1;
-   transform: translateX(-50%);
-   border-radius: 0 0 50% 50%;
-   background-color: #1da5f3 ;
-   transition: all 0.3s;
+   width: 135%; /* Lebar lebih dari container untuk efek melengkung */
+   height: 25rem; /* Tinggi backdrop */
+   position: absolute; /* Posisi absolute */
+   top: 0; /* Posisi di atas */
+   left: 50%; /* Mulai dari tengah */
+   z-index: -1; /* Di belakang konten lain */
+   transform: translateX(-50%); /* Pusatkan horizontal */
+   border-radius: 0 0 50% 50%; /* Membuat lengkungan di bawah */
+   background-color: #1da5f3 ; /* Warna biru */
+   transition: all 0.3s; /* Animasi smooth */
 }
+/* Container untuk header setiap layar */
 .head-wrapper{
  
-    padding: 0 30px;
+    padding: 0 30px; /* Padding kiri kanan */
 }
+/* Styling untuk tombol menu hamburger */
 .menu-btn{
-    cursor: pointer;
-    width: 2rem;
-    border-radius: 50%;
-    color: #ffffff;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
+    cursor: pointer; /* Pointer cursor saat hover */
+    width: 2rem; /* Lebar tombol */
+    border-radius: 50%; /* Membuat bulat */
+    color: #ffffff; /* Warna putih */
+    font-size: 1.5rem; /* Ukuran font */
+    display: flex; /* Flexbox untuk centering */
+    justify-content: center; /* Pusatkan horizontal */
+    align-items: center; /* Pusatkan vertikal */
+    cursor: pointer; /* Pointer cursor */
+    z-index: 10; /* Layer di atas elemen lain */
 }
+/* Section welcome/sambutan */
 .welcome {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px; 
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Pisahkan konten ke kiri dan kanan */
+    margin-top: 20px; /* Margin atas */
 }
+/* Heading welcome */
 .welcome h1 {
-    font-size: 1.5rem;
-    color: #f5f5f5;
+    font-size: 1.5rem; /* Ukuran font besar */
+    color: #f5f5f5; /* Warna putih */
   
 }
+/* Paragraf dalam welcome */
 .welcome p {
-   font-weight: 500;
-   color: #f5f5f5;
+   font-weight: 500; /* Font semi-bold */
+   color: #f5f5f5; /* Warna putih */
 }
+/* Container gambar profil */
 .welcome .img {
-    position: relative;
+    position: relative; /* Posisi relatif untuk backdrop */
 }
+/* Gambar profil */
 .welcome .img img {
-    width: 5rem;
+    width: 5rem; /* Lebar gambar */
 }
+/* Backdrop lingkaran putih di belakang gambar profil */
 .welcome .img .backdrop{
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 4rem;
-    width: 3.8rem;
-    border-radius: 50%;
-    background-color: #f5f5f5;
-    z-index: -1;
+    position: absolute; /* Posisi absolute */
+    top: 0; /* Dari atas */
+    left: 50%; /* Dari tengah */
+    transform: translateX(-50%); /* Pusatkan horizontal */
+    height: 4rem; /* Tinggi backdrop */
+    width: 3.8rem; /* Lebar backdrop */
+    border-radius: 50%; /* Membuat bulat */
+    background-color: #f5f5f5; /* Warna putih */
+    z-index: -1; /* Di belakang gambar */
 }
+/* Wrapper untuk container kategori */
 .categories-wrapper{
-    margin-top: 1rem;
-    height: calc(100% - 8rem);
-    overflow: auto;
-    padding: 0 30px;
-    padding-bottom: 20px;
+    margin-top: 1rem; /* Margin atas */
+    height: calc(100% - 8rem); /* Tinggi dikurangi header (8rem) */
+    overflow: auto; /* Scroll jika konten melebihi tinggi */
+    padding: 0 30px; /* Padding kiri kanan */
+    padding-bottom: 20px; /* Padding bawah tambahan */
 }
+/* Container untuk daftar kategori */
 .categories {
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding-top: 1rem; /* Padding atas */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Susun vertikal */
+    gap: 1rem; /* Jarak antar kategori */
 }
+/* Card untuk setiap kategori */
 .categories .category{
-    background-color: #fff;
-    padding: 1.5rem 1rem;
-    border-radius: 0.7rem;
-    box-shadow: 0 10px 20px 5px #00000023;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    transition: all 0.3s;
+    background-color: #fff; /* Background putih */
+    padding: 1.5rem 1rem; /* Padding dalam card */
+    border-radius: 0.7rem; /* Border radius untuk rounded corner */
+    box-shadow: 0 10px 20px 5px #00000023; /* Shadow halus */
+    cursor: pointer; /* Pointer cursor saat hover */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Pisahkan konten kiri dan kanan */
+    transition: all 0.3s; /* Animasi smooth untuk semua perubahan */
     
 }
+/* Efek hover pada kategori - naik ke atas dengan shadow lebih kuat */
 .categories .category:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px 5px #00000040;
+    transform: translateY(-5px); /* Geser ke atas 5px */
+    box-shadow: 0 10px 20px 5px #00000040; /* Shadow lebih gelap */
 }
+/* Bagian kiri kategori (icon + teks) */
 .category .left{
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Pusatkan vertikal */
+    gap: 1.5rem; /* Jarak antara icon dan teks */
 }
+/* Icon kategori */
 .category .left img{
-    width: 3rem;
+    width: 3rem; /* Lebar icon */
 }
+/* Heading judul kategori */
 .category .content h1{
-    font-size: 1.5rem;
-    color: #2e2e2e;
+    font-size: 1.5rem; /* Ukuran font */
+    color: #2e2e2e; /* Warna teks gelap */
   
 }
+/* Paragraf jumlah tugas */
 .category .content p{
-    color: #2e2e2e;
-    font-weight: 0.8rem;
-    opacity: 0.6;
+    color: #2e2e2e; /* Warna teks gelap */
+    font-weight: 0.8rem; /* Font weight */
+    opacity: 0.6; /* Transparansi untuk teks secondary */
 }
+/* Menu option (tersembunyi secara default) */
 .category .option{
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
+    opacity: 0; /* Transparansi penuh (tidak terlihat) */
+    visibility: hidden; /* Tersembunyi */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Tampilkan option saat kategori di-hover */
 .category:hover .option{
-    opacity: 1;
-    visibility: visible;
+    opacity: 1; /* Terlihat */
+    visibility: visible; /* Tampilkan */
 }
+/* Tombol toggle (titik tiga) */
 .category .toggle-btn{
-    width: 2rem;
-    cursor: pointer;
-    opacity: 0.6;
+    width: 2rem; /* Lebar tombol */
+    cursor: pointer; /* Pointer cursor */
+    opacity: 0.6; /* Sedikit transparan */
 }
 
 
 /*screen kedua*/
+/* Header untuk layar kategori */
 .category-screen .head-wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Pisahkan tombol back dan options */
+    align-items: center; /* Pusatkan vertikal */
 }
+/* SVG icons di header layar kategori */
 .category-screen .head-wrapper svg{
-    width: 2rem;
-    cursor: pointer;
-    color: #ffffff;
+    width: 2rem; /* Lebar icon */
+    cursor: pointer; /* Pointer cursor */
+    color: #ffffff; /* Warna putih */
 }
+/* Detail kategori di layar kedua */
 .category-details{
-    margin-top: 7rem;
-    padding: 0 30px;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    margin-top: 7rem; /* Margin atas besar untuk memberi ruang dari header */
+    padding: 0 30px; /* Padding kiri kanan */
+    display: flex; /* Flexbox layout */
+    gap: 1rem; /* Jarak antara gambar dan teks */
+    align-items: center; /* Pusatkan vertikal */
 }
+/* Gambar kategori di detail */
 .category-details img{
-    width: 4rem;
+    width: 4rem; /* Lebar gambar */
 }
+/* Teks jumlah tugas di detail kategori */
 .category-details .details p{
-    opacity: 0.5;
+    opacity: 0.5; /* Transparansi untuk teks secondary */
 
 
 }
 /* task screen2 */
+/* Wrapper untuk daftar tugas */
 .tasks-wrapper{
-    margin-top: 1rem;
-    height: calc(100% - 12rem);
-    overflow: auto;
-    padding: 0 30px;
-    padding-bottom: 20px;
+    margin-top: 1rem; /* Margin atas */
+    height: calc(100% - 12rem); /* Tinggi dikurangi header dan category details */
+    overflow: auto; /* Scroll jika konten melebihi tinggi */
+    padding: 0 30px; /* Padding kiri kanan */
+    padding-bottom: 20px; /* Padding bawah */
 }
+/* Pesan saat tidak ada tugas */
 .no-task{
-    margin-top: 5rem;
-    text-align: center;
-    font-size: 1.5rem;
-    opacity: 0.6;
+    margin-top: 5rem; /* Margin atas besar */
+    text-align: center; /* Teks di tengah */
+    font-size: 1.5rem; /* Ukuran font besar */
+    opacity: 0.6; /* Sedikit transparan */
 }
+/* Container untuk daftar tugas */
 .tasks{
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding-top: 1rem; /* Padding atas */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Susun vertikal */
+    gap: 1rem; /* Jarak antar tugas */
 }
+/* Wrapper untuk setiap item tugas */
 .task-wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Pisahkan task dan tombol delete */
+    align-items: center; /* Pusatkan vertikal */
 }
+/* Label untuk checkbox dan teks tugas */
 .task{
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    width: 100%;
-    cursor: pointer;
+    display: flex; /* Flexbox layout */
+    gap: 0.5rem; /* Jarak antara checkbox dan teks */
+    align-items: center; /* Pusatkan vertikal */
+    font-size: 0.9rem; /* Ukuran font */
+    font-weight: 500; /* Font semi-bold */
+    width: 100%; /* Lebar penuh */
+    cursor: pointer; /* Pointer cursor */
 }
+/* Teks dalam task */
 .task p{
-    display: block;
-    color: #2e2e2e;
+    display: block; /* Block display */
+    color: #2e2e2e; /* Warna teks gelap */
 }
+/* Custom checkbox styling */
 .task .checkmark{
-    width: 1.2rem;
-    height: 1.2rem;
-    border: 2px solid #2e2e2e;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-shrink: 0;
+    width: 1.2rem; /* Lebar checkbox */
+    height: 1.2rem; /* Tinggi checkbox */
+    border: 2px solid #2e2e2e; /* Border gelap */
+    border-radius: 4px; /* Sedikit rounded corner */
+    align-items: center; /* Pusatkan isi vertikal */
+    justify-content: center; /* Pusatkan isi horizontal */
+    display: flex; /* Flexbox untuk centering */
+    flex-shrink: 0; /* Tidak mengecil saat ruang terbatas */
 }
+/* Sembunyikan checkbox default HTML */
 .task input[type="checkbox"]{
-    display: none;
+    display: none; /* Tersembunyi */
 }
+/* Icon centang dalam checkbox */
 .task .checkmark svg{
-    width: 0.8rem;
-    color: #2e2e2e;
-    opacity: 0;
-    transition: all 0.3s;
+    width: 0.8rem; /* Lebar icon */
+    color: #2e2e2e; /* Warna gelap */
+    opacity: 0; /* Tersembunyi secara default */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Tampilkan icon centang saat hover pada task */
 .task:hover .checkmark svg{
-    opacity: 1;
+    opacity: 1; /* Terlihat saat hover */
 }
+/* Styling saat checkbox di-check - background berubah */
 .task input:checked + .checkmark{
-    background-color: #2e2e2e;
+    background-color: #2e2e2e; /* Background gelap */
 }
+/* Icon centang terlihat dan berwarna putih saat checked */
 .task input:checked + .checkmark svg{
-    opacity: 1;
-    color: white;
+    opacity: 1; /* Terlihat */
+    color: white; /* Warna putih */
 }
+/* Ketebalan stroke icon centang */
 .task .checkmark svg path{
-    stroke-width: 3;
+    stroke-width: 3; /* Stroke tebal */
 }
+/* Alternative selector untuk checkbox yang di-check */
 .task input:checked~.checkmark{
-    background-color: #2e2e2e;
+    background-color: #2e2e2e; /* Background gelap */
 }
+/* Icon centang saat checked (alternative selector) */
 .task input:checked~.checkmark svg{
-    opacity: 1;
-    color: white;
+    opacity: 1; /* Terlihat */
+    color: white; /* Warna putih */
 }
+/* Teks tugas dicoret saat selesai */
 .task input:checked~p{
-    text-decoration: line-through;
-    opacity: 0.6;
+    text-decoration: line-through; /* Teks dicoret */
+    opacity: 0.6; /* Sedikit transparan */
 }
+/* Tombol delete tugas */
 .task-wrapper .delete{
-    min-width: 2rem;
-    height: 2rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    color: #2e2e2e;
-    cursor: pointer;
-    background-color: rgba(0,0,0,0.031);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
+    min-width: 2rem; /* Lebar minimal */
+    height: 2rem; /* Tinggi tombol */
+    padding: 0.5rem; /* Padding dalam */
+    border-radius: 50%; /* Membuat bulat */
+    color: #2e2e2e; /* Warna icon */
+    cursor: pointer; /* Pointer cursor */
+    background-color: rgba(0,0,0,0.031); /* Background sedikit gelap */
+    opacity: 0; /* Tersembunyi secara default */
+    visibility: hidden; /* Tidak terlihat */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Tampilkan tombol delete saat hover pada task wrapper */
 .task-wrapper:hover .delete{
-    opacity: 1;
-    visibility: visible;
+    opacity: 1; /* Terlihat */
+    visibility: visible; /* Tampilkan */
 }
+/* Efek hover pada tombol delete */
 .task-wrapper .delete:hover{
-    background-color: rgba(0,0,0,0.1);
-    color: red;
+    background-color: rgba(0,0,0,0.1); /* Background lebih gelap */
+    color: red; /* Warna merah untuk bahaya */
 }
+/* Tombol floating untuk menambah tugas */
 .add-task-btn{
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: #1da5f3;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s;
+    position: absolute; /* Posisi absolute */
+    bottom: 1rem; /* Jarak dari bawah */
+    right: 1rem; /* Jarak dari kanan */
+    width: 3rem; /* Lebar tombol */
+    height: 3rem; /* Tinggi tombol */
+    border-radius: 50%; /* Membuat bulat */
+    background-color: #1da5f3; /* Warna biru */
+    cursor: pointer; /* Pointer cursor */
+    display: flex; /* Flexbox untuk centering */
+    justify-content: center; /* Pusatkan horizontal */
+    align-items: center; /* Pusatkan vertikal */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Animasi tombol add saat modal active - bergerak ke atas dan rotasi */
 .add-task-btn.active{
-    z-index: 1;
-    bottom: 20rem;
-    transform: rotate(45deg);
+    z-index: 1; /* Layer di atas */
+    bottom: 20rem; /* Bergerak ke atas */
+    transform: rotate(45deg); /* Rotasi 45 derajat (plus jadi X) */
 
 }
+/* Efek hover pada tombol add - membesar */
 .add-task-btn:hover{
-    transform: scale(1.1);
+    transform: scale(1.1); /* Membesar 10% */
 }
+/* Icon plus dalam tombol add */
 .add-task-btn svg{
-    width: 2rem;
-    color: #f5f5f5;
+    width: 2rem; /* Lebar icon */
+    color: #f5f5f5; /* Warna putih */
 }
+/* Modal form untuk menambah tugas */
 .add-task{
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    width: 100%;
-    padding: 20px 30px;
-    transition: all 0.3s;
+    position: absolute; /* Posisi absolute */
+    bottom: -100%; /* Tersembunyi di bawah layar */
+    left: 0; /* Mulai dari kiri */
+    width: 100%; /* Lebar penuh */
+    padding: 20px 30px; /* Padding dalam modal */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Modal tampil saat active - slide up dari bawah */
 .add-task.active{
-    bottom: 0;
+    bottom: 0; /* Posisi normal di bawah */
 }
+/* Judul modal */
 .add-task .heading{
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem; /* Ukuran font besar */
+    margin-bottom: 1rem; /* Margin bawah */
 }
+/* Grup input dalam form */
 .input-group{
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 20px; /* Margin bawah antar input */
+    position: relative; /* Posisi relatif untuk positioning */
 }
+/* Label dan input dalam grup */
 .input-group input,
 .input-group label{
-    display: block;
-    width: 100%;
+    display: block; /* Block display */
+    width: 100%; /* Lebar penuh */
 }
 
+/* Styling untuk input dan select */
 .input-group input,
 .input-group select{
-   width: 100%;
-   border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
+   width: 100%; /* Lebar penuh */
+   border: 1px solid #ccc; /* Border abu-abu */
+    border-radius: 5px; /* Rounded corner */
+    padding: 10px; /* Padding dalam */
+    font-size: 16px; /* Ukuran font */
 }
+/* Label dalam input group */
 .input-group label{
-    width: max-content;
-    padding: 0 5px;
-    margin-top: 5px;
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 5px;
+    width: max-content; /* Lebar sesuai konten */
+    padding: 0 5px; /* Padding kiri kanan */
+    margin-top: 5px; /* Margin atas */
+    font-size: 14px; /* Ukuran font kecil */
+    color: #666; /* Warna abu-abu */
+    margin-bottom: 5px; /* Margin bawah */
 }
+/* Container untuk tombol-tombol modal */
 .btns{
     
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    align-items: center;
+    display: flex; /* Flexbox layout */
+    gap: 1rem; /* Jarak antar tombol */
+    justify-content: flex-end; /* Posisikan ke kanan */
+    align-items: center; /* Pusatkan vertikal */
 }
+/* Styling untuk semua tombol */
 .btns button{
-    z-index: 2;
-    padding: 10px 20px;
-    display: flex;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+    z-index: 2; /* Layer di atas backdrop */
+    padding: 10px 20px; /* Padding dalam tombol */
+    display: flex; /* Flexbox layout */
+    border-radius: 5px; /* Rounded corner */
+    border: none; /* Hilangkan border default */
+    outline: none; /* Hilangkan outline default */
+    font-size: 14px; /* Ukuran font */
+    font-weight: 600; /* Font bold */
+    cursor: pointer; /* Pointer cursor */
 }
+/* Styling khusus untuk tombol Add */
 .btns button.add-btn{
-    background-color: #1da5f3;
-    color: #efefef;
+    background-color: #1da5f3; /* Background biru */
+    color: #efefef; /* Teks putih */
 
 }
+/* Backdrop putih melengkung untuk modal */
 .add-task-backdrop{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 135%;
-    height: 20rem;
-    border-radius: 50% 50% 0 0;
-    background-color: #fff;
+    position: absolute; /* Posisi absolute */
+    bottom: 0; /* Di bagian bawah */
+    left: 50%; /* Mulai dari tengah */
+    transform: translateX(-50%); /* Pusatkan horizontal */
+    width: 135%; /* Lebar lebih dari container */
+    height: 20rem; /* Tinggi backdrop */
+    border-radius: 50% 50% 0 0; /* Lengkungan di atas */
+    background-color: #fff; /* Background putih */
 }
+/* Backdrop gelap untuk overlay saat modal terbuka */
 .black-backdrop{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #00000023;
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
+    position: absolute; /* Posisi absolute */
+    top: 0; /* Dari atas */
+    left: 0; /* Dari kiri */
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    background-color: #00000023; /* Background hitam transparan */
+    backdrop-filter: blur(5px); /* Efek blur */
+    opacity: 0; /* Tersembunyi secara default */
+    visibility: hidden; /* Tidak terlihat */
+    transition: all 0.3s; /* Animasi smooth */
 }
+/* Backdrop terlihat saat modal active */
 .black-backdrop.active{
-    opacity: 1;
-    visibility: visible;
+    opacity: 1; /* Terlihat */
+    visibility: visible; /* Tampilkan */
 }
